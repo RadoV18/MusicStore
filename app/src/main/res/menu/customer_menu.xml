@@ -7,15 +7,11 @@
             <item android:id="@+id/nav_home"
                 android:title="Bienvenido a Music Store!"
                 />
-            <item android:id="@+id/nav_login"
+            <item android:id="@+id/nav_log_out"
                 android:icon="@drawable/ic_login"
-                android:title="Iniciar Sesión" />
-            <item android:id="@+id/nav_sign_up"
-                android:icon="@drawable/ic_login"
-                android:title="Registrarse" />
+                android:title="Cerrar Sesión" />
         </menu>
     </item>
-    <!-- TODO: Add categories -->
     <item android:title="Categorías">
         <menu>
             <item android:id="@+id/nav_section"

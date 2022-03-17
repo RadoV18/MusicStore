@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MusicStore">
         <activity
+            android:name=".view.activities.AdminActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.activities.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.MusicStore.NoActionBar">

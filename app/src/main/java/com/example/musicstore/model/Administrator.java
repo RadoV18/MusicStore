@@ -14,6 +14,10 @@ public class Administrator {
         this.name = name;
     }
 
+    public Administrator(long userId) {
+        this.userId = userId;
+    }
+
     public long getId() {
         return id;
     }

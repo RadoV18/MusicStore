@@ -16,10 +16,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="8dp"
-        android:text="Text"
+        android:text=""
+        android:textSize="20dp"
+        android:id="@+id/nav_tvUsername"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Lorem ipsum" />
 </LinearLayout>
