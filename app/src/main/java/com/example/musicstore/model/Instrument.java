@@ -1,7 +1,14 @@
 package com.example.musicstore.model;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
+import com.example.musicstore.view.adapters.ProductModel;
+
+import java.util.ArrayList;
 
 public class Instrument {
     private long id;
@@ -97,6 +104,26 @@ public class Instrument {
 
     public void setStock(int stock) {
         this.stock = stock;
+    }
+
+    public static ArrayList<ProductModel> selectAllAsProductModel(SQLiteDatabase db) {
+        ArrayList<ProductModel> list = new ArrayList<>();
+        Cursor cursor = db.query("Instrument", null, null, null, null, null, null);
+        while(cursor.moveToNext()) {
+            System.out.println(cursor.getInt(0));
+            long categoryId = cursor.getLong(1);
+            String name = cursor.getString(2);
+            String description = cursor.getString(3);
+            double price = cursor.getDouble(4);
+            long brandId = cursor.getLong(5);
+            byte[] imgArray = cursor.getBlob(6);
+            Bitmap image = BitmapFactory.decodeByteArray(imgArray, 0, imgArray.length);
+            int stock = cursor.getInt(8);
+            ProductModel product = new ProductModel(image, name, description, String.valueOf(price),
+                    String.valueOf(stock), String.valueOf(brandId));
+            list.add(product);
+        }
+        return list;
     }
 
     public long insert(SQLiteDatabase db) {

@@ -13,6 +13,10 @@ public class InstrumentType {
         this.typeName = typeName;
     }
 
+    public InstrumentType(long id) {
+        this.id = id;
+    }
+
     public long getId() {
         return id;
     }
@@ -35,6 +39,17 @@ public class InstrumentType {
         long rowId = db.insert("InstrumentType", null, values);
         setId(rowId);
         return rowId;
+    }
+
+    public boolean findById(SQLiteDatabase db) {
+        String selection = "id = ?";
+        String[] selectionArgs = { String.valueOf(id) };
+        Cursor cursor = db.query("InstrumentType", null, selection, selectionArgs, null, null, null);
+        if(cursor.moveToFirst()) {
+            setTypeName(cursor.getString(1));
+            return true;
+        }
+        return false;
     }
 
     public boolean findByName(SQLiteDatabase db) {
