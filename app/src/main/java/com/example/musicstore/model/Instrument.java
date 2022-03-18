@@ -21,6 +21,10 @@ public class Instrument {
     private boolean isAvailable;
     private int stock;
 
+    public Instrument(long id) {
+        this.id = id;
+    }
+
     public Instrument(long instrumentTypeId, String name, String description,
                       double price, long brandId, byte[] image, boolean isAvailable,
                       int stock) {
@@ -124,6 +128,38 @@ public class Instrument {
             list.add(product);
         }
         return list;
+    }
+
+    public void update(SQLiteDatabase db) {
+        ContentValues values = new ContentValues();
+        values.put("InstrumentType_id", instrumentTypeId);
+        values.put("name", name);
+        values.put("description", description);
+        values.put("price", price);
+        values.put("Brand_id", brandId);
+        values.put("image", image);
+        values.put("isAvailable", isAvailable);
+        values.put("stock", stock);
+        String[] selectionArgs = { String.valueOf(id) };
+        db.update("Instrument", values, "id = ?", selectionArgs);
+    }
+
+    public boolean findById(SQLiteDatabase db) {
+        String selection = "id = ?";
+        String[] selectionArgs = { String.valueOf(id) };
+        Cursor cursor = db.query("Instrument", null, selection, selectionArgs, null, null, null);
+        if(cursor.moveToFirst()) {
+            setInstrumentTypeId(cursor.getLong(1));
+            setName(cursor.getString(2));
+            setDescription(cursor.getString(3));
+            setPrice(cursor.getDouble(4));
+            setBrandId(cursor.getLong(5));
+            setImage(cursor.getBlob(6));
+            setAvailable(true);
+            setStock(cursor.getInt(8));
+            return true;
+        }
+        return false;
     }
 
     public long insert(SQLiteDatabase db) {

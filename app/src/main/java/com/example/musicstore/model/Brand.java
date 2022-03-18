@@ -12,6 +12,10 @@ public class Brand {
         this.name = name;
     }
 
+    public Brand(long id) {
+        this.id = id;
+    }
+
     public long getId() {
         return id;
     }
@@ -36,12 +40,24 @@ public class Brand {
         return rowId;
     }
 
+    public boolean findById(SQLiteDatabase db) {
+        String selection = "id = ?";
+        String[] selectionArgs = {String.valueOf(id)};
+        Cursor cursor = db.query("Brand", null, null, null, null, null, null);
+        if(cursor.moveToFirst()) {
+            setName(cursor.getString(1));
+            return true;
+        }
+        return false;
+    }
+
     public boolean findByName(SQLiteDatabase db) {
         String selection = "name = ?";
         String[] selectionArgs = {name};
         Cursor cursor = db.query("Brand", null, selection, selectionArgs, null, null, null);
         if(cursor.moveToFirst()) {
             setId(cursor.getInt(0));
+            return true;
         }
         return false;
     }

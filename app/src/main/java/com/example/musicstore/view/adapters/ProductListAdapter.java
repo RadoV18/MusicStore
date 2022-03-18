@@ -36,7 +36,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         holder.tvDescription.setText(product.getDescription());
         holder.tvPrice.setText("Precio: $" + product.getPrice());
         holder.tvCategory.setText("Categoría: " + product.getCategory());
-        holder.tvStock.setText("Stock" + product.getStock());
+        holder.tvStock.setText("Stock: " + product.getStock());
     }
 
     @Override
