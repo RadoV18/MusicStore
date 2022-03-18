@@ -13,21 +13,21 @@
                 android:title="Cerrar Sesión" />
         </menu>
     </item>
-    <item android:title="Categorías">
-        <menu>
-            <item android:id="@+id/nav_section"
-                android:icon="@drawable/ic_login"
-                android:title="Section" />
-            <item android:id="@+id/nav_section2"
-                android:icon="@drawable/ic_login"
-                android:title="Section" />
-            <item android:id="@+id/nav_categoryExample3"
-                android:icon="@drawable/ic_login"
-                android:title="Category" />
-            <item android:id="@+id/nav_categoryExample4"
-                android:icon="@drawable/ic_login"
-                android:title="Category" />
-        </menu>
-    </item>
+<!--    <item android:title="Categorías">-->
+<!--        <menu>-->
+<!--            <item android:id="@+id/nav_section"-->
+<!--                android:icon="@drawable/ic_login"-->
+<!--                android:title="Section" />-->
+<!--            <item android:id="@+id/nav_section2"-->
+<!--                android:icon="@drawable/ic_login"-->
+<!--                android:title="Section" />-->
+<!--            <item android:id="@+id/nav_categoryExample3"-->
+<!--                android:icon="@drawable/ic_login"-->
+<!--                android:title="Category" />-->
+<!--            <item android:id="@+id/nav_categoryExample4"-->
+<!--                android:icon="@drawable/ic_login"-->
+<!--                android:title="Category" />-->
+<!--        </menu>-->
+<!--    </item>-->
 
 </menu>

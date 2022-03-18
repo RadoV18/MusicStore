@@ -9,11 +9,11 @@
                 android:title="Cerrar Sesión" />
         </menu>
     </item>
-    <item android:title="Productos">
+    <item android:title="Instrumentos">
         <menu>
             <item android:id="@+id/nav_product_list"
                 android:icon="@drawable/ic_list"
-                android:title="Lista de Productos" />
+                android:title="Lista de Instrumentos" />
             <item android:id="@+id/nav_product_add"
                 android:icon="@drawable/ic_add"
                 android:title="Agregar" />

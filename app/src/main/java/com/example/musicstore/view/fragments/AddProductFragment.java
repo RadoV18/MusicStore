@@ -29,6 +29,7 @@ import com.example.musicstore.controller.AddProductController;
 import com.example.musicstore.model.DatabaseHelper;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class AddProductFragment extends Fragment {
 
@@ -112,25 +113,36 @@ public class AddProductFragment extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        //super method removed
         if (resultCode == RESULT_OK) {
             if (requestCode == 1000) {
                 Uri returnUri = data.getData();
                 bitmapImage = null;
                 try {
-                    bitmapImage = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), returnUri);
+                    bitmapImage = MediaStore.Images.Media.getBitmap(requireActivity().getContentResolver(), returnUri);
                     ivImage.setImageBitmap(bitmapImage);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+            } else {
+                System.out.println(requestCode);
             }
+        } else {
+            System.out.println("not ok");
         }
     }
 
     public void startGallery() {
-        Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        galleryIntent.setType("image/*");
-        startActivityForResult(galleryIntent, 1000);
+        Intent getIntent = new Intent(Intent.ACTION_GET_CONTENT);
+        getIntent.setType("image/*");
+
+        Intent pickIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        pickIntent.setType("image/*");
+
+        Intent chooserIntent = Intent.createChooser(getIntent, "Select Image");
+        chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[] {pickIntent});
+
+        startActivityForResult(chooserIntent, 1000);
+//        startActivityForResult(galleryIntent, 1000);
     }
 
     public void restoreValues() {

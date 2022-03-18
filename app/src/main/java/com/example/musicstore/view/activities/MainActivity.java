@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.musicstore.R;
+import com.example.musicstore.model.DatabaseHelper;
 import com.example.musicstore.view.fragments.AddProductFragment;
 import com.example.musicstore.view.fragments.DeleteProductFragment;
 import com.example.musicstore.view.fragments.HomeFragment;
@@ -31,6 +32,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+//        DatabaseHelper dbHelper = DatabaseHelper.getInstance(getApplicationContext());
+//        dbHelper.onUpgrade(dbHelper.getReadableDatabase(), 1, 1);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 

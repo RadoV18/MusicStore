@@ -3,7 +3,8 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string-array name="categories">
-        <item>Categoría 0</item>
-        <item>Categoría 1</item>
+        <item>Guitarras</item>
+        <item>Bajos</item>
+        <item>Percusión</item>
     </string-array>
 </resources>
