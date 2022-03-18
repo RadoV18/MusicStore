@@ -162,6 +162,12 @@ public class Instrument {
         return false;
     }
 
+    public void delete(SQLiteDatabase db) {
+        String where = "id = ?";
+        String[] args = { String.valueOf(id)};
+        db.delete("Instrument", where, args);
+    }
+
     public long insert(SQLiteDatabase db) {
         ContentValues values = new ContentValues();
         values.put("InstrumentType_id", instrumentTypeId);
