@@ -5,6 +5,7 @@
     <item android:title="Opciones">
         <menu>
             <item android:id="@+id/nav_home"
+                android:icon="@drawable/ic_home"
                 android:title="Bienvenido a Music Store!"
                 />
             <item android:id="@+id/nav_log_out"

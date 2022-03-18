@@ -6,12 +6,13 @@
         <menu>
             <item android:id="@+id/nav_home"
                 android:title="Bienvenido a Music Store!"
+                android:icon="@drawable/ic_home"
                 />
             <item android:id="@+id/nav_login"
                 android:icon="@drawable/ic_login"
                 android:title="Iniciar Sesión" />
             <item android:id="@+id/nav_sign_up"
-                android:icon="@drawable/ic_login"
+                android:icon="@drawable/ic_sign_up"
                 android:title="Registrarse" />
         </menu>
     </item>

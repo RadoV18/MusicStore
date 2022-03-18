@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,8 +15,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.musicstore.R;
+import com.example.musicstore.view.fragments.AddProductFragment;
+import com.example.musicstore.view.fragments.DeleteProductFragment;
 import com.example.musicstore.view.fragments.HomeFragment;
 import com.example.musicstore.view.fragments.LoginFragment;
+import com.example.musicstore.view.fragments.ModifyProductFragment;
+import com.example.musicstore.view.fragments.ProductListFragment;
 import com.example.musicstore.view.fragments.SignUpFragment;
 import com.google.android.material.navigation.NavigationView;
 
@@ -51,11 +56,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         try {
             // customer logged in
             String name = getIntent().getExtras().getString("username");
-            String message = "Bienvenido, " + name + ".";
-            TextView tvUsername = (TextView) navigationView.getHeaderView(0).findViewById(R.id.nav_tvUsername);
-            tvUsername.setText(message);
-            navigationView.getMenu().clear();
-            navigationView.inflateMenu(R.menu.customer_menu);
+            if(name != null) {
+                String message = "Bienvenido, " + name + ".";
+                TextView tvUsername = (TextView) navigationView.getHeaderView(0).findViewById(R.id.nav_tvUsername);
+                tvUsername.setText(message);
+                navigationView.getMenu().clear();
+                navigationView.inflateMenu(R.menu.customer_menu);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -63,11 +70,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         try {
             // admin logged in
             String adminName = getIntent().getExtras().getString("adminName");
-            String message = "Bienvenido, " + adminName + ".";
-            TextView tvUsername = (TextView) navigationView.getHeaderView(0).findViewById(R.id.nav_tvUsername);
-            tvUsername.setText(message);
-            navigationView.getMenu().clear();
-            navigationView.inflateMenu(R.menu.admin_menu);
+            if(adminName != null) {
+                String message = "Bienvenido, " + adminName + ".";
+                TextView tvUsername = (TextView) navigationView.getHeaderView(0).findViewById(R.id.nav_tvUsername);
+                tvUsername.setText(message);
+                navigationView.getMenu().clear();
+                navigationView.inflateMenu(R.menu.admin_menu);
+                setCurrentFragment(new ProductListFragment());
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -82,24 +92,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(invokeMain);
                 break;
             case R.id.nav_home:
-                getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.fragmentContainer, new HomeFragment())
-                        .commit();
+                setCurrentFragment(new HomeFragment());
                 break;
-
             case R.id.nav_login:
-                getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.fragmentContainer, new LoginFragment())
-                        .commit();
+                setCurrentFragment(new LoginFragment());
                 break;
             case R.id.nav_sign_up:
-                getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.fragmentContainer, new SignUpFragment())
-                        .commit();
+                setCurrentFragment(new SignUpFragment());
                 break;
+            case R.id.nav_product_list:
+                setCurrentFragment(new ProductListFragment());
+                break;
+            case R.id.nav_product_add:
+                setCurrentFragment(new AddProductFragment());
+                break;
+            case R.id.nav_product_modify:
+                setCurrentFragment(new ModifyProductFragment());
+                break;
+            case R.id.nav_product_delete:
+                setCurrentFragment(new DeleteProductFragment());
+                break;
+
         }
         drawer.closeDrawer(GravityCompat.START);
         return true;
@@ -113,5 +126,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else {
             super.onBackPressed();
         }
+    }
+
+    public void setCurrentFragment(Fragment f) {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragmentContainer, f)
+                .commit();
     }
 }
