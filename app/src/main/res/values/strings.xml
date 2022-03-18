@@ -2,4 +2,8 @@
     <string name="app_name">MusicStore</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string-array name="categories">
+        <item>Categoría 0</item>
+        <item>Categoría 1</item>
+    </string-array>
 </resources>

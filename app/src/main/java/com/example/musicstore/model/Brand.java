@@ -1,18 +1,22 @@
 package com.example.musicstore.model;
 
+import android.content.ContentValues;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+
 public class Brand {
-    private int id;
+    private long id;
     private String name;
 
     public Brand(String name) {
         this.name = name;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -22,6 +26,24 @@ public class Brand {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public long insert(SQLiteDatabase db) {
+        ContentValues values = new ContentValues();
+        values.put("name", this.name);
+        long rowId = db.insert("Brand", null, values);
+        setId(rowId);
+        return rowId;
+    }
+
+    public boolean findByName(SQLiteDatabase db) {
+        String selection = "name = ?";
+        String[] selectionArgs = {name};
+        Cursor cursor = db.query("Brand", null, selection, selectionArgs, null, null, null);
+        if(cursor.moveToFirst()) {
+            setId(cursor.getInt(0));
+        }
+        return false;
     }
 
     public static String getCreateQueryString() {

@@ -1,20 +1,22 @@
 package com.example.musicstore.model;
 
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
+
 public class Instrument {
-    private int id;
-    private int instrumentTypeId;
+    private long id;
+    private long instrumentTypeId;
     private String name;
     private String description;
     private double price;
-    private int brandId;
-    private Byte[] image;
+    private long brandId;
+    private byte[] image;
     private boolean isAvailable;
     private int stock;
-    private int administratorId;
 
-    public Instrument(int instrumentTypeId, String name, String description,
-                      double price, int brandId, Byte[] image, boolean isAvailable,
-                      int stock, int administratorId) {
+    public Instrument(long instrumentTypeId, String name, String description,
+                      double price, long brandId, byte[] image, boolean isAvailable,
+                      int stock) {
         this.instrumentTypeId = instrumentTypeId;
         this.name = name;
         this.description = description;
@@ -23,22 +25,21 @@ public class Instrument {
         this.image = image;
         this.isAvailable = isAvailable;
         this.stock = stock;
-        this.administratorId = administratorId;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public int getInstrumentTypeId() {
+    public long getInstrumentTypeId() {
         return instrumentTypeId;
     }
 
-    public void setInstrumentTypeId(int instrumentTypeId) {
+    public void setInstrumentTypeId(long instrumentTypeId) {
         this.instrumentTypeId = instrumentTypeId;
     }
 
@@ -66,19 +67,19 @@ public class Instrument {
         this.price = price;
     }
 
-    public int getBrandId() {
+    public long getBrandId() {
         return brandId;
     }
 
-    public void setBrandId(int brandId) {
+    public void setBrandId(long brandId) {
         this.brandId = brandId;
     }
 
-    public Byte[] getImage() {
+    public byte[] getImage() {
         return image;
     }
 
-    public void setImage(Byte[] image) {
+    public void setImage(byte[] image) {
         this.image = image;
     }
 
@@ -98,12 +99,19 @@ public class Instrument {
         this.stock = stock;
     }
 
-    public int getAdministratorId() {
-        return administratorId;
-    }
-
-    public void setAdministratorId(int administratorId) {
-        this.administratorId = administratorId;
+    public long insert(SQLiteDatabase db) {
+        ContentValues values = new ContentValues();
+        values.put("InstrumentType_id", instrumentTypeId);
+        values.put("name", name);
+        values.put("description", description);
+        values.put("price", price);
+        values.put("Brand_id", brandId);
+        values.put("image", image);
+        values.put("isAvailable", isAvailable);
+        values.put("stock", stock);
+        long rowId = db.insert("Instrument", null, values);
+        setId(rowId);
+        return rowId;
     }
 
     public static String getCreateQueryString() {
@@ -117,9 +125,6 @@ public class Instrument {
                 "    image blob NOT NULL,\n" +
                 "    isAvailable boolean NOT NULL,\n" +
                 "    stock integer NOT NULL,\n" +
-                "    Administrator_id integer NOT NULL,\n" +
-                "    CONSTRAINT Instrument_Administrator FOREIGN KEY (Administrator_id)\n" +
-                "    REFERENCES Administrator (id),\n" +
                 "    CONSTRAINT Instrument_InstrumentType FOREIGN KEY (InstrumentType_id)\n" +
                 "    REFERENCES InstrumentType (id),\n" +
                 "    CONSTRAINT Instrument_Brand FOREIGN KEY (Brand_id)\n" +
